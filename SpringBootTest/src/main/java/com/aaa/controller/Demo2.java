@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.aaa.pojo.User;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 @Controller
 public class Demo2 {
 	@RequestMapping("/test3")
@@ -21,7 +24,7 @@ public class Demo2 {
 	public String test1(){
 		return "/NewFile";
 	}
-	@RequestMapping("/login")
+	@RequestMapping(value = "/login",method = RequestMethod.GET)
 	public String login(User user,HttpServletRequest request,HttpServletResponse response){
 		if(user.isRember()){
 		Cookie cookie = new Cookie("loginUserCookie", user.getUsername()+","+user.getPassword());
@@ -42,5 +45,12 @@ public class Demo2 {
 			e.printStackTrace();
 		}
 		return "/NewFile";
+	}
+	@RequestMapping(value = "/login",method = RequestMethod.POST)
+	@ResponseBody
+	public String login(String uname,String pwd){
+		System.out.println(uname);
+		System.out.println(pwd);
+		return "ok";
 	}
 }

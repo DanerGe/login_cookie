@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8"/>
 <title>Insert title here</title>
@@ -25,12 +25,26 @@ function getCookie(cname) {
 function signout(){
 	location.href="/signout";
 }
+function login(){
+    $.ajax({
+        url:"/login",
+        data:{
+            uname:$("[name='username']").val(),
+            pwd:$("[name='password']").val()
+        },
+        type:"POST",
+        success:function(res){
+            console.log(res)
+        }
+    })
+}
 /*]]>*/
 </script>
 </head>
 <body>
 <input type="button" style="float: right;" value="退出" onclick="signout()"/>
-<input name="username"/>
-<input name="password"/>
+用户名<input name="username"/>
+密码<input name="password" type="password"/>
+<button onclick="login()">登录</button>
 </body>
 </html>
